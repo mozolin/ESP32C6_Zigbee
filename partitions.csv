@@ -1,0 +1,13 @@
+# Name,   Type, SubType, Offset,  Size, Flags
+# Note: if you have increased the bootloader size, make sure to update the offsets to avoid overlap
+# CONFIG_PARTITION_TABLE_OFFSET=0x8000 (32K) + 0x1000 = 36K
+# 36K + 24K + 4K + 16K + 1K = 81K
+# 2000K - 81K = 1919K (/2 = 959.5K - for "factory" and "ota" apps)
+# => actually each of apps = !!! 900K !!!
+nvs,        data, nvs,      , 24K,
+phy_init,   data, phy,      , 4K,
+factory,    app,  factory,  , 900K,
+zb_storage, data, fat,      , 16K,
+zb_fct,     data, fat,      , 1K,
+ota_0,      app,  ota_0,    , 900K,
+ota_1,      app,  ota_1,    , 900K,
